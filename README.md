@@ -13,6 +13,11 @@ No business logic is included, making it suitable as a starting point for new pr
     - Default batch fetch size and other basic settings included
 - **JSON**: Jackson
     - Configurations for safe serialization of lazy-loaded entities
+- **QueryDSL**: Type-safe query framework for JPA
+  - Used for complex and dynamic JPA queries
+  - Custom repositories implemented using `JPAQueryFactory`
+  - Explicit fetch strategies applied for `open-in-view = false`
+  - Q classes are generated under `src/main/generated`
 - **YML-based Settings**: Profiles, groups, and logging
     - `spring.profiles.group` used for environment grouping
     - `decorator.datasource.exclude-beans` applied for multi-datasource control
