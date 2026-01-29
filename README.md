@@ -35,6 +35,7 @@ Collects metrics such as JVM memory, request counts, response times, etc.
 | 2026-01-24 | Initial skeleton setup with YML configurations |
 | 2026-01-27 | Add BaseEntity with common audit fields |
 | 2026-01-28 | Add Swagger,Querydsl Configuration and Common Enum Serialization and Conversion Support |
+| 2026-01-29 | Add JPA Converter for enum and boolean types |
 | ...        | ... |
 
 ---
