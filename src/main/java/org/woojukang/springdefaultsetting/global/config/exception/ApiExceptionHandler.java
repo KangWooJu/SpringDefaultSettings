@@ -13,7 +13,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.woojukang.springdefaultsetting.global.config.exception.domain.BadRequestException;
 import org.woojukang.springdefaultsetting.global.config.exception.domain.BaseDataException;
 import org.woojukang.springdefaultsetting.global.config.exception.domain.BaseException;
-import org.woojukang.springdefaultsetting.global.config.exception.domain.ForBiddenException;
+import org.woojukang.springdefaultsetting.global.config.exception.domain.ForbiddenException;
 import org.woojukang.springdefaultsetting.global.config.exception.dto.ApiResult;
 
 import java.nio.file.AccessDeniedException;
@@ -82,8 +82,8 @@ public class ApiExceptionHandler {
      * 권한 없음 - 커스텀 예외
      */
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    @ExceptionHandler(ForBiddenException.class)
-    public ApiResult<Void> forbiddenExceptionHandler(ForBiddenException e) {
+    @ExceptionHandler(ForbiddenException.class)
+    public ApiResult<Void> forbiddenExceptionHandler(ForbiddenException e) {
 
         logWarnException(e, FORBIDDEN);
 

@@ -4,16 +4,16 @@ import org.woojukang.springdefaultsetting.global.config.exception.BaseExceptionE
 
 import java.io.Serial;
 
-public class ForBiddenException extends BaseException{
+public class ForbiddenException extends BaseException{
 
     @Serial
     private static final long serialVersionUID = -5148452097821358350L;
 
-    public ForBiddenException() {
+    public ForbiddenException() {
         super(BaseExceptionEnum.FORBIDDEN, new Object[]{"인증 실패"});
     }
 
-    public ForBiddenException(Object[] message) {
+    public ForbiddenException(Object[] message) {
         super(BaseExceptionEnum.FORBIDDEN, message);
     }
 }
