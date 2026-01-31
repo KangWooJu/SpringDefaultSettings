@@ -1,5 +1,9 @@
 package org.woojukang.springdefaultsetting.global.enums;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.woojukang.springdefaultsetting.global.constant.serializer.MessageCommSerializer;
+
+@JsonSerialize(using = MessageCommSerializer.class)
 public interface MessageCommInterface {
     String getCode();
     String getMessage();
