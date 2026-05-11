@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 @Repository
 @RequiredArgsConstructor
-public class UserAuthCacheRepository {
+public class UserAuthCacheRepository  {
 
     private final RedisTemplate<String,UserAuthCache> userAuthredisTemplate;
 
@@ -36,7 +36,6 @@ public class UserAuthCacheRepository {
                 .get("security:auth:user:"+username);
 
         return Optional.ofNullable(userAuthCache);
-
 
     }
 }
