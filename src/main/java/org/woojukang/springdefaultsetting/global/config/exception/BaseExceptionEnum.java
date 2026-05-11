@@ -15,7 +15,9 @@ public enum BaseExceptionEnum implements MessageCommInterface {
     ACCESS_DENIED("BASE.EXCEPTION.ACCESS_DENIED", "{0}"),
     JWT_EXPIRED("BASE.EXCEPTION.JWT_EXPIRED","JWT 토큰이 파기되었습니다."),
     INVALID_TOKEN_CATEGORY("BASE.EXCEPTION.INVALID_TOKEN_CATEGORY","해당 토큰의 카테고리는 적절하지 않습니다."),
-    AUTH_SESSION_NOT_FOUND("BASE.EXCEPTION.AUTH_SESSION_NOT_FOUND","캐시에서 해당 유저를 찾을 수 없습니다.")
+    AUTH_SESSION_NOT_FOUND("BASE.EXCEPTION.AUTH_SESSION_NOT_FOUND","캐시에서 해당 유저를 찾을 수 없습니다."),
+    REFRESH_TOKEN_NOT_FOUND("BASE.EXCEPTION.REFRESH_TOKEN_NOT_FOUND","refresh 토큰을 찾을 수 없습니다."),
+    USER_ALREADY_LOGIN("BASE.EXCEPTION.USER_ALREADY_LOGIN","해당 유저는 이미 로그인 하였습니다.")
     ;
 
     private final String errorCode;
