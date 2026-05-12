@@ -117,7 +117,7 @@ public class RefreshService {
 
     }
 
-    private void deleteRefresh(String refresh){
+    public void deleteRefresh(String refresh){
 
         String username = jwtUtil.getUsername(refresh);
 
