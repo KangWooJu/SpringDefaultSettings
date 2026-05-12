@@ -35,7 +35,16 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("프로젝트 API")
-                .description("설명")
+                .description("""
+                             JWT Authentication 가이드
+
+                             - AccessToken: Authorization Header (Bearer Token)
+                             - RefreshToken: HttpOnly Cookie
+
+                               예시:
+                               Authorization: Bearer {accessToken}
+                               Cookies={RefreshToken
+                             """)
                 .version("1.0.0");
     }
 }
