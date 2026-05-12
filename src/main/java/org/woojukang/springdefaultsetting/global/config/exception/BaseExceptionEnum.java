@@ -17,7 +17,8 @@ public enum BaseExceptionEnum implements MessageCommInterface {
     INVALID_TOKEN_CATEGORY("BASE.EXCEPTION.INVALID_TOKEN_CATEGORY","해당 토큰의 카테고리는 적절하지 않습니다."),
     AUTH_SESSION_NOT_FOUND("BASE.EXCEPTION.AUTH_SESSION_NOT_FOUND","캐시에서 해당 유저를 찾을 수 없습니다."),
     REFRESH_TOKEN_NOT_FOUND("BASE.EXCEPTION.REFRESH_TOKEN_NOT_FOUND","refresh 토큰을 찾을 수 없습니다."),
-    USER_ALREADY_LOGIN("BASE.EXCEPTION.USER_ALREADY_LOGIN","해당 유저는 이미 로그인 하였습니다.")
+    USER_ALREADY_LOGIN("BASE.EXCEPTION.USER_ALREADY_LOGIN","해당 유저는 이미 로그인 하였습니다."),
+    USER_NOT_FOUND("BASE.EXCEPTION.USER_NOT_FOUND","해당 유저를 찾을 수 없습니다.")
     ;
 
     private final String errorCode;
