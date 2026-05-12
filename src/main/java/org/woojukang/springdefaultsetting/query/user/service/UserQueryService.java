@@ -3,6 +3,8 @@ package org.woojukang.springdefaultsetting.query.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
+import org.woojukang.springdefaultsetting.global.config.exception.BaseExceptionEnum;
+import org.woojukang.springdefaultsetting.global.config.exception.domain.BaseException;
 import org.woojukang.springdefaultsetting.query.user.repository.UserQueryRepository;
 
 @Service
@@ -13,7 +15,10 @@ public class UserQueryService {
 
     public User findByUsername(String username){
 
-        return userQueryRepository.findByUsername(username);
+        return userQueryRepository
+                .findByUsername(username)
+                .orElseThrow(()-> new BaseException(BaseExceptionEnum
+                        .USER_NOT_FOUND));
 
     }
 }

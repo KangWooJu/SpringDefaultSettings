@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.woojukang.springdefaultsetting.domain.user.entity.QUser;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
 
+import java.util.Optional;
+
 
 @Repository
 @RequiredArgsConstructor
@@ -14,15 +16,16 @@ public class UserQueryRepository {
     private final JPAQueryFactory jpaQueryFactory;
     private final QUser user = QUser.user;
 
-    public User findByUsername(String username){
+    public Optional<User> findByUsername(String username) {
 
-        return jpaQueryFactory
-                .select(user)
-                .from(user)
-                .where(user
-                        .username
-                        .eq(username))
-                .fetchOne();
+        return Optional.ofNullable(
+                jpaQueryFactory
+                        .selectFrom(user)
+                        .where(user.username.eq(username))
+                        .fetchOne()
+
+        );
+
     }
 
 }
