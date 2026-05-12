@@ -36,7 +36,7 @@ public class SwaggerConfig {
         return new Info()
                 .title("프로젝트 API")
                 .description("""
-                             JWT Authentication 가이드
+                             * JWT Authentication 가이드
 
                              - AccessToken: Authorization Header (Bearer Token)
                              - RefreshToken: HttpOnly Cookie
@@ -44,6 +44,11 @@ public class SwaggerConfig {
                                예시:
                                Authorization: Bearer {accessToken}
                                Cookies={RefreshToken
+                               
+                             * 로그인/로그아웃 가이드 
+                             
+                             해당 서비스의 로그인/로그아웃은 Controller가 아닌 Security Filter에서 처리됩니다.
+                             자세한 요청/응답 형식은 Mock API 문서를 참고해주세요.
                              """)
                 .version("1.0.0");
     }

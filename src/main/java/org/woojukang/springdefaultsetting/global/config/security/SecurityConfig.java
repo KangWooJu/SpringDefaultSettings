@@ -89,7 +89,8 @@ public class SecurityConfig {
                         "/v3/api-docs",
                         "/swagger-resources/**",
                         "/webjars/**",
-                        "/mock/api/**"
+                        "/mock/api/**",
+                        "/docs/api/**"
                 )
                 .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()
