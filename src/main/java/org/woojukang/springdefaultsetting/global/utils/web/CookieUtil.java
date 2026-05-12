@@ -10,7 +10,7 @@ public class CookieUtil {
 
     public Cookie zeroCookie(HttpServletResponse response){
 
-        Cookie cookie = new Cookie("refresh",null);
+        Cookie cookie = new Cookie("refreshToken",null);
         cookie.setMaxAge(0);
         cookie.setPath("/");
 
