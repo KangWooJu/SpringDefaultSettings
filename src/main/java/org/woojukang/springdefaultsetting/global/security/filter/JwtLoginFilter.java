@@ -16,8 +16,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.woojukang.springdefaultsetting.global.config.exception.dto.ApiResult;
 import org.woojukang.springdefaultsetting.global.security.dto.request.LoginRequest;
+import org.woojukang.springdefaultsetting.global.security.dto.response.LoginResponse;
 import org.woojukang.springdefaultsetting.global.security.service.RefreshService;
 import org.woojukang.springdefaultsetting.global.security.util.JwtUtil;
+import org.woojukang.springdefaultsetting.global.utils.app.JsonResponseUtils;
 import org.woojukang.springdefaultsetting.global.utils.web.CookieUtil;
 
 import java.io.IOException;
@@ -106,7 +108,19 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.setHeader("accessToken",access);
         response.addCookie(cookieUtil.createCookie("refreshToken",refresh));
-        response.setStatus(HttpStatus.OK.value());
+
+        ApiResult<?> result = ApiResult
+                .success(new LoginResponse(username,
+                        "로그인에 성공하였습니다.",
+                        LocalDate
+                                .now()
+                                .toString()));
+
+        JsonResponseUtils
+                .writeJsonResponse(HttpStatus
+                        .OK,
+                        response,
+                        result);
 
     }
 
@@ -117,18 +131,14 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
              AuthenticationException failed)
             throws IOException, ServletException {
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-
         ApiResult<?> result = ApiResult
                 .fail("AUTH_FAILED","아이디 또는 비밀번호가 일치하지 않습니다.");
 
-        String json = objectMapper.writeValueAsString(result);
-
-        response.getWriter().write(json);
-        response.getWriter().flush();
-        response.flushBuffer();
+        JsonResponseUtils.writeJsonResponse(
+                HttpStatus.UNAUTHORIZED,
+                response,
+                result
+        );
 
     }
 }
