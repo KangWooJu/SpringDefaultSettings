@@ -20,6 +20,12 @@ spring:
         default_batch_fetch_size: 500
     open-in-view: false
 
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+
+
 springdoc:
   api-docs:
     path: /v3/api-docs
