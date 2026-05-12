@@ -38,7 +38,7 @@ public class RefreshService {
             return handleRefreshTokenExpired();
         }
 
-        return new ReissueResponse("토큰이 갱신 되었습니다.",
+        return new ReissueResponse(ReissueResponse.ReissueStatus.REFRESH_REISSUED,
                 LocalDateTime
                         .now()
                         .toString(),
@@ -47,7 +47,7 @@ public class RefreshService {
     }
 
     private ReissueResponse handleRefreshTokenNull(){
-        return new ReissueResponse("REFRESH_NULL",
+        return new ReissueResponse(ReissueResponse.ReissueStatus.REFRESH_NULL,
                 LocalDateTime
                         .now()
                         .toString(),
@@ -56,7 +56,7 @@ public class RefreshService {
     }
 
     private ReissueResponse handleRefreshTokenExpired(){
-        return new ReissueResponse("REFRESH_EXPIRED",
+        return new ReissueResponse(ReissueResponse.ReissueStatus.REFRESH_EXPIRED,
                 LocalDateTime
                         .now()
                         .toString(),
@@ -126,7 +126,7 @@ public class RefreshService {
         }
 
         userTokenCacheRepository
-                .delete("refresh:refreshToken"+refresh);
+                .delete("refresh:refreshToken:"+refresh);
 
         userTokenCacheRepository
                 .delete("refresh:user:"+username);
@@ -135,7 +135,7 @@ public class RefreshService {
 
     public void validateAlreadyLogin(String username){
 
-        if(userTokenCacheRepository.exists(username)){
+        if(userTokenCacheRepository.exists("refresh:user:" + username)){
             throw new BaseException(BaseExceptionEnum.USER_ALREADY_LOGIN);
         }
     }
