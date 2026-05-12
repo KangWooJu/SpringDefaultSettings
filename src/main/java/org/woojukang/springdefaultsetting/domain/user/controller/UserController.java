@@ -1,6 +1,7 @@
 package org.woojukang.springdefaultsetting.domain.user.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.woojukang.springdefaultsetting.domain.user.dto.response.UserDeleteRes
 import org.woojukang.springdefaultsetting.domain.user.facade.UserFacade;
 import org.woojukang.springdefaultsetting.global.config.exception.dto.ApiResult;
 
+@Tag(name = "user",description = "유저 API")
 @RestController
 @RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
