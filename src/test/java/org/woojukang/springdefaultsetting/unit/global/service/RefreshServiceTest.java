@@ -126,9 +126,9 @@ class RefreshServiceTest {
                 .findCookie(request))
                 .thenReturn(oldRefresh);
 
-        doNothing()
-                .when(jwtUtil)
-                .isExpired(oldRefresh);
+        when(jwtUtil
+                .isExpired(oldRefresh))
+                .thenReturn(false);
 
         when(jwtUtil
                 .getUsername(oldRefresh))
