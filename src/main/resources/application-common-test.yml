@@ -2,21 +2,42 @@ spring:
   config:
     activate:
       on-profile: common-test
+
   datasource:
-    url: ${db.url}
+    url: ${DATABASE_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${db.username}
-    password: ${db.password}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
 
   servlet:
     multipart:
       max-file-size: 25GB
       max-request-size: 25GB
+
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
     properties:
       hibernate:
         default_batch_fetch_size: 500
+        format_sql: true
     open-in-view: false
+    show-sql: true
 
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    disable-swagger-default-url: true
+    display-request-duration: true
+  packages-to-scan: org.woojukang.springdefaultsetting
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
