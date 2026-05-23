@@ -2,8 +2,10 @@ package org.woojukang.springdefaultsetting.unit.query.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
 import org.woojukang.springdefaultsetting.global.config.exception.BaseExceptionEnum;
 import org.woojukang.springdefaultsetting.global.config.exception.domain.BaseException;
@@ -15,6 +17,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class UserQueryServiceTest {
 
     @Mock
@@ -46,7 +49,6 @@ class UserQueryServiceTest {
     }
 
     @Test
-
     @DisplayName("username에 해당하는 user가 없을 시, USER_NOT_FOUND 예외 발생")
     void findByUsername_fail_userNotFound() {
 
