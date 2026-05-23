@@ -1,4 +1,4 @@
-package org.woojukang.springdefaultsetting.unit.global.service;
+package org.woojukang.springdefaultsetting.unit.global.security.service;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
