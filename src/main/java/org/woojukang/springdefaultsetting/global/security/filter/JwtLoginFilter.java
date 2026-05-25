@@ -106,7 +106,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         log.info("로그인 성공:{} " + " [ Time ]:{}",username, LocalDate.now());
 
-        response.setHeader("accessToken",access);
+        response.setHeader("Authorization", "Bearer " + access);
         response.addCookie(cookieUtil.createCookie("refreshToken",refresh));
 
         ApiResult<?> result = ApiResult
