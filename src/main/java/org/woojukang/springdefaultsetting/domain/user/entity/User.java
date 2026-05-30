@@ -1,9 +1,6 @@
 package org.woojukang.springdefaultsetting.domain.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.woojukang.springdefaultsetting.global.jpa.BaseEntity;
 
@@ -12,6 +9,7 @@ import org.woojukang.springdefaultsetting.global.jpa.BaseEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "users")
 public class User extends BaseEntity {
 
     @Id
