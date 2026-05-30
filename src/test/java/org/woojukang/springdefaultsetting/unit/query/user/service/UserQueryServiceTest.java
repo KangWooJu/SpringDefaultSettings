@@ -1,4 +1,4 @@
-package org.woojukang.springdefaultsetting.unit.query.service;
+package org.woojukang.springdefaultsetting.unit.query.user.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
