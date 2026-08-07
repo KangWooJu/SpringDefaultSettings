@@ -46,4 +46,3 @@ springdoc:
   h2:
     console:
       enabled: true
-
