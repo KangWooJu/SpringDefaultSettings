@@ -1,100 +1,333 @@
 # Spring Boot Skeleton / Template for Any Project
 
-This is a Spring Boot project skeleton containing only the minimal configurations.  
-No business logic is included, making it suitable as a starting point for new projects.
+A reusable Spring Boot project template containing common backend configurations and infrastructure.
+
+This project focuses on providing a solid starting point for backend development by including commonly used components such as Spring Security, JWT authentication, Redis, QueryDSL, Swagger, common response handling, exception handling, and a complete testing environment.
+
+Business logic is intentionally excluded so that the template can be reused for any project.
 
 ---
 
-## 1. Configuration Overview
+# Features
 
-- **JPA**: Spring Data JPA
-
-    - `spring.jpa.hibernate.ddl-auto = none`
-    - `spring.jpa.open-in-view = false`
-    - Default batch fetch size and common JPA optimization settings included
-    - JPA Auditing enabled for common entity timestamp management
-    - Soft delete support with BaseEntity abstraction
-
-- **JSON**: Jackson
-
-    - Configurations for safe serialization of lazy-loaded entities
-    - Common JSON response structure with `ApiResult`
-
-- **QueryDSL**: Type-safe query framework for JPA
-
-    - Used for complex and dynamic JPA queries
-    - Custom repositories implemented using `JPAQueryFactory`
-    - Explicit fetch strategies applied for `open-in-view = false`
-    - Optional-based query handling for null safety
-    - Q classes are generated under `src/main/generated`
-
-- **Security**: Spring Security + JWT
-
-    - JWT-based authentication and authorization
-    - AccessToken + RefreshToken authentication strategy
-    - Custom JWT authentication/login/logout filters
-    - Refresh token reissue and invalidation flow
-    - Custom `UserDetailsService` implementation
-    - Redis-backed JWT session/token validation
-    - Unified authentication success/failure response structure
-
-- **Redis**
-
-    - RedisTemplate configuration for auth/session cache management
-    - Refresh token persistence and renewal support
-    - Redis-based authentication session cache repository
-
-- **Swagger / OpenAPI**
-
-    - Swagger UI and OpenAPI configuration
-    - JWT authentication guide documentation
-    - Mock APIs for filter-based authentication endpoints
-    - Swagger tags for API grouping
-
-- **YML-based Settings**
-
-    - Profiles, groups, and logging configurations
-    - `spring.profiles.group` used for environment grouping
-    - `decorator.datasource.exclude-beans` applied for multi-datasource control
-
-
-- **Utilities**
-
-    - Cookie utility for refresh token handling
-    - Common JSON response utility for security filters
-    - Common exception handling with `BaseException` and `ExceptionHandler`
-Can be integrated with Prometheus, Grafana, or other monitoring tools
-Collects metrics such as JVM memory, request counts, response times, etc.
----
-
-## 2. Progress / Changelog
-
-| Date       | Description |
-|------------|-------------|
-| 2026-01-24 | Initial skeleton setup with YML configurations |
-| 2026-01-27 | Add BaseEntity with common audit fields |
-| 2026-01-28 | Add Swagger,Querydsl Configuration and Common Enum Serialization and Conversion Support |
-| 2026-01-29 | Add JPA Converter for enum and boolean types |
-| 2026-01-30 | Add base enum and interface for API success/failure messages |
-| 2026-01-31 | Add CustomException with ExceptionHandler , Common ApiResult Response |
-| 2026-05-07 | Implement user create/delete logic with soft delete and enable JPA auditing |
-| 2026-05-07 | Configure Redis templates and repositories for auth/session cache management |
-| 2026-05-07 | Implement JWT-based authentication and Redis-backed JWT request validation |
-| 2026-05-07 | Configure QueryDSL, application beans, CORS, and Swagger settings |
-| 2026-05-11 | Extract cookie utility and add refresh token authentication exception handling |
-| 2026-05-11 | Add authentication response DTOs and implement JWT login filter |
-| 2026-05-11 | Implement refresh token persistence, renewal, and Redis token management |
-| 2026-05-12 | Unify login response structure and separate refresh token validation logic |
-| 2026-05-12 | Implement custom UserDetailsService and Optional-based user lookup handling |
-| 2026-05-12 | Refactor refresh token response handling using enum-based status |
-| 2026-05-12 | Configure JWT authentication filter chain, logout filter, and refresh token reissue API |
-| 2026-05-12 | Improve Swagger authentication documentation and add mock APIs for filter-based authentication |
-
+- Spring Boot 4
+- Spring Security + JWT Authentication
+- Access Token / Refresh Token Strategy
+- Redis Authentication Cache
+- QueryDSL
+- Spring Data JPA
+- Swagger / OpenAPI
+- Global Exception Handling
+- Common API Response
+- Soft Delete Support
+- JPA Auditing
+- Testcontainers
+- Repository Slice Test
+- Controller Test
+- Integration Test
+- Unit Test
 
 ---
 
-## 3. Getting Started (Optional)
+# Tech Stack
 
-1. Clone the project:
+| Category | Technology |
+|-----------|------------|
+| Language | Java 21 |
+| Framework | Spring Boot 4 |
+| Security | Spring Security, JWT |
+| Database | MySQL, Redis |
+| ORM | Spring Data JPA, QueryDSL |
+| Documentation | Swagger / OpenAPI |
+| Testing | JUnit5, Mockito, H2, Testcontainers |
+| Build Tool | Gradle |
+
+---
+
+# Configuration Overview
+
+## JPA
+
+- Spring Data JPA
+- `spring.jpa.open-in-view = false`
+- JPA Auditing enabled
+- Soft Delete support
+- Common `BaseEntity`
+- Batch Fetch optimization
+- Optional-based query handling
+
+---
+
+## QueryDSL
+
+- Type-safe JPA queries
+- Custom repositories using `JPAQueryFactory`
+- Fetch Join support
+- Dynamic query implementation
+- Generated Q Classes under:
+
+```text
+src/main/generated
+```
+
+---
+
+## Security
+
+- JWT Authentication
+- AccessToken + RefreshToken strategy
+- Custom Authentication Filter
+- Custom Login Filter
+- Custom Logout Filter
+- Refresh Token Reissue
+- Refresh Token Invalidation
+- Custom `UserDetailsService`
+- Redis-backed authentication cache
+- `UserAuthCache` support
+- Unified authentication response format
+
+---
+
+## Redis
+
+- Authentication Cache
+- Refresh Token Repository
+- Typed Redis Serializer
+- RedisTemplate configuration
+- User cache retrieval API
+
+---
+
+## User Domain
+
+- User Create
+- User Delete (Soft Delete)
+- Nickname support
+- User lookup by ID
+- Common timestamp management using `Instant`
+
+---
+
+## Swagger / OpenAPI
+
+- Swagger UI configuration
+- JWT Authentication Guide
+- Filter Mock APIs
+- API Group Tags
+- Common API documentation
+
+---
+
+## Exception Handling
+
+- Global Exception Handler
+- BaseException
+- Common Exception Enum
+- Standardized API Error Response
+
+---
+
+## JSON
+
+- Jackson Configuration
+- Common `ApiResult`
+- JSON Serializer
+- Enum Serialization
+- Lazy Loading Serialization Support
+
+---
+
+## YML Configuration
+
+- Profile-based configuration
+- Environment variable support
+- Test profile
+- Local profile
+- Production profile
+
+---
+
+## Testing
+
+The project contains a complete testing environment.
+
+### Unit Test
+
+- Mockito
+- Service Layer
+- Security Components
+
+### Controller Test
+
+- MockMvc
+
+### Repository Slice Test
+
+- DataJpaTest
+- QueryDSL
+- H2 Database
+
+### Integration Test
+
+- SpringBootTest
+- Testcontainers
+- MySQL Container
+- Redis Container
+
+---
+
+# Project Structure
+
+```text
+src
+├── global
+│   ├── config
+│   ├── security
+│   ├── redis
+│   ├── exception
+│   ├── response
+│   ├── swagger
+│   ├── util
+│   └── querydsl
+│
+├── domain
+│   └── user
+│
+└── generated
+```
+
+---
+
+# Progress / Changelog
+
+| Date | Description |
+|------|-------------|
+| 2026-01-24 | Initial Spring Boot skeleton setup |
+| 2026-01-27 | Add `BaseEntity` with JPA auditing support |
+| 2026-01-28 | Configure QueryDSL, Swagger, and common enum serialization |
+| | Update JSON and Swagger dependencies |
+| 2026-01-29 | Add JPA converters for enum and boolean types |
+| 2026-01-30 | Add common success/failure message interfaces and enums |
+| 2026-01-31 | Add global exception handling and common `ApiResult` response |
+| | Refactor common serializers and import structure |
+| 2026-05-07 | Implement User create/delete with soft delete |
+| | Enable JPA auditing |
+| | Configure Redis templates and authentication cache repositories |
+| | Implement JWT authentication and authorization |
+| | Configure QueryDSL, application beans, CORS, and Swagger |
+| 2026-05-11 | Extract Cookie utility for refresh token handling |
+| | Add refresh token authentication exception handling |
+| | Add authentication response DTOs |
+| | Implement refresh token persistence and renewal |
+| 2026-05-12 | Unify authentication response structure |
+| | Separate refresh token validation logic |
+| | Implement custom `UserDetailsService` |
+| | Improve user lookup with `Optional` |
+| | Add `BaseException` for user lookup failures |
+| | Refactor refresh token responses using enums |
+| | Configure JWT filter chain |
+| | Implement refresh token reissue API |
+| | Add logout filter with refresh token invalidation |
+| | Improve Swagger authentication documentation |
+| | Add Swagger mock APIs for authentication filters |
+| | Add Swagger tag documentation for User APIs |
+| | Correct Swagger package scan configuration |
+| 2026-05-16 | Add unit tests for UserQueryService |
+| | Add unit tests for RefreshService token reissue flow |
+| | Update SpringDoc package scanning configuration |
+| 2026-05-23 | Configure common test profile |
+| | Update datasource environment variables |
+| | Expand User and Security unit tests |
+| | Apply MockitoExtension to UserQueryService tests |
+| | Fix JwtUtil mock behavior |
+| 2026-05-25 | Add unit tests for CookieUtil |
+| | Add unit tests for RefreshTokenValidator |
+| | Add unit tests for JwtFilter |
+| | Refactor Authorization header to Bearer format |
+| | Add unit tests for JwtLoginFilter |
+| | Add unit tests for JwtLogoutFilter |
+| 2026-05-30 | Configure H2 environment for repository slice tests |
+| | Configure DataJpaTest environment |
+| | Add QueryDSL repository slice tests |
+| | Move UserQueryService tests to the query package |
+| | Rename user table to `users` |
+| | Add Redis user cache retrieval API |
+| 2026-07-20 | Apply typed Redis serializer for `UserAuthCache` |
+| 2026-08-07 | Add nickname support to the User domain |
+| | Add user lookup by ID |
+| | Cache authenticated user information on login |
+| | Refactor timestamp type from `LocalDateTime` to `Instant` |
+| | Rename Redis template for refresh tokens |
+| | Configure Testcontainers integration test environment |
+| | Implement `UserDetailsService` |
+| | Add unit tests for the User domain |
+| | Add unit tests for the Refresh domain |
+| | Add controller tests for the User domain |
+| | Add repository slice tests for the User domain |
+| | Add integration test template |
+| | Add integration tests for the User domain |
+
+
+---
+
+# Getting Started
+
+## Clone Repository
+
 ```bash
-git clone https://github.com/KangWooJu/SpringDefaultSettings
+git clone https://github.com/KangWooJu/SpringDefaultSettings.git
+```
+
+```bash
+cd SpringDefaultSettings
+```
+
+---
+
+## Configure Environment Variables
+
+Configure the required environment variables.
+
+Example:
+
+```text
+DATABASE_URL=
+DATABASE_USERNAME=
+DATABASE_PASSWORD=
+
+REDIS_HOST=
+REDIS_PORT=
+
+JWT_SECRET=
+```
+
+---
+
+## Build
+
+```bash
+./gradlew clean build
+```
+
+---
+
+## Run
+
+```bash
+./gradlew bootRun
+```
+
+---
+
+# Future Improvements
+
+- Flyway Migration
+- Docker Compose Environment
+- GitHub Actions CI/CD
+- Prometheus & Grafana Monitoring
+- Multi-module Architecture
+- OpenTelemetry
+- Rate Limiting
+- API Versioning
+- Structured Logging
+- Metrics Dashboard
