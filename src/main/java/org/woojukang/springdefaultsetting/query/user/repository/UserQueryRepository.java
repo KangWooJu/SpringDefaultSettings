@@ -28,4 +28,28 @@ public class UserQueryRepository {
 
     }
 
+    public Optional<User> findById(Long id){
+
+        return Optional.ofNullable(
+                jpaQueryFactory
+                        .selectFrom(user)
+                        .where(user
+                                .id
+                                .eq(id))
+                        .fetchOne()
+        );
+    }
+
+    // nickname 중복 체크하기
+    public boolean existsByNickname(String nickname){
+
+        Integer result = jpaQueryFactory
+                .selectOne()
+                .from(user)
+                .where(user.nickname.eq(nickname))
+                .fetchFirst();
+
+        return result != null;
+    }
+
 }

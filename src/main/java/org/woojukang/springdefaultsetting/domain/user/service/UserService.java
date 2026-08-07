@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.woojukang.springdefaultsetting.domain.user.dto.request.UserCreateRequest;
-import org.woojukang.springdefaultsetting.domain.user.dto.response.UserCreateResponse;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
 import org.woojukang.springdefaultsetting.domain.user.repository.UserRepository;
 
@@ -24,6 +23,8 @@ public class UserService {
                 .password(bCryptPasswordEncoder
                         .encode(userCreateRequest
                                 .password()))
+                .nickname(userCreateRequest
+                        .nickname())
                 .role("USER")
                 .deleted(false)
                 .build();

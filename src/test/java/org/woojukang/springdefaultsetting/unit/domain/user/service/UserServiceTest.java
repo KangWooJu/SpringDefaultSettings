@@ -34,6 +34,7 @@ class UserServiceTest {
         // given
         UserCreateRequest request = new UserCreateRequest(
                 "testUser",
+                "testNickname",
                 "1234"
         );
 
@@ -48,6 +49,10 @@ class UserServiceTest {
         assertThat(user
                 .getUsername())
                 .isEqualTo("testUser");
+
+        assertThat(user
+                .getNickname())
+                .isEqualTo("testNickname");
 
         assertThat(user
                 .getPassword())
@@ -75,9 +80,11 @@ class UserServiceTest {
                 .builder()
                 .username("testUser")
                 .password("1234")
+                .nickname("testNickname")
                 .role("USER")
                 .deleted(false)
                 .build();
+
 
         // when
         userService.save(user);
@@ -94,6 +101,7 @@ class UserServiceTest {
                 .builder()
                 .username("testUser")
                 .password("1234")
+                .nickname("testNickname")
                 .role("USER")
                 .deleted(false)
                 .build();

@@ -40,6 +40,7 @@ class UserQueryRepositoryTest {
                 .password("1234")
                 .deleted(false)
                 .role("ROLE_USER")
+                .nickname("testUser")
                 .build();
 
         userRepository.save(user);
@@ -58,6 +59,12 @@ class UserQueryRepositoryTest {
                 .getUsername())
                 .isEqualTo(user
                         .getUsername());
+
+        assertThat(result
+                .get()
+                .getNickname())
+                .isEqualTo(user
+                        .getNickname());
 
     }
 
