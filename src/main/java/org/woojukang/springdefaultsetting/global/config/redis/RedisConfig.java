@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer;
+import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.woojukang.springdefaultsetting.global.security.dto.UserAuthCache;
 
@@ -37,7 +37,7 @@ public class RedisConfig {
 
     // RefreshToken 같은 문자열 저장용
     @Bean
-    public RedisTemplate<String, String> stringRedisTemplate() {
+    public RedisTemplate<String, String> refreshTokenRedisTemplate() {
 
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
 
@@ -66,8 +66,8 @@ public class RedisConfig {
         StringRedisSerializer stringSerializer =
                 new StringRedisSerializer();
 
-        GenericJacksonJsonRedisSerializer jsonSerializer =
-                GenericJacksonJsonRedisSerializer.builder().build();
+        JacksonJsonRedisSerializer<UserAuthCache> jsonSerializer =
+                new JacksonJsonRedisSerializer<>(UserAuthCache.class);
 
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setValueSerializer(jsonSerializer);

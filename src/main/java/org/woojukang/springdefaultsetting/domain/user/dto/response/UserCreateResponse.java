@@ -1,8 +1,8 @@
 package org.woojukang.springdefaultsetting.domain.user.dto.response;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public record UserCreateResponse(String username,
-                                 LocalDateTime createdAt,
-                                 LocalDateTime updatedAt) {
+                                 Instant createdAt,
+                                 Instant updatedAt) {
 }

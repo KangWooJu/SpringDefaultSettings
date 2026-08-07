@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
 import org.woojukang.springdefaultsetting.global.config.exception.BaseExceptionEnum;
 import org.woojukang.springdefaultsetting.global.config.exception.domain.BaseException;
+import org.woojukang.springdefaultsetting.global.security.dto.UserAuthCache;
+import org.woojukang.springdefaultsetting.global.security.repository.UserAuthCacheRepository;
 import org.woojukang.springdefaultsetting.query.user.repository.UserQueryRepository;
 
 @Service
@@ -12,10 +14,30 @@ import org.woojukang.springdefaultsetting.query.user.repository.UserQueryReposit
 public class UserQueryService {
 
     private final UserQueryRepository userQueryRepository;
+    private final UserAuthCacheRepository userAuthCacheRepository;
 
+    // RDB에서 조회
     public User findByUsername(String username){
 
         return userQueryRepository
+                .findByUsername(username)
+                .orElseThrow(()-> new BaseException(BaseExceptionEnum
+                        .USER_NOT_FOUND));
+
+    }
+
+    public User findById(Long id){
+
+        return userQueryRepository
+                .findById(id)
+                .orElseThrow(()-> new BaseException(BaseExceptionEnum
+                        .USER_NOT_FOUND));
+    }
+
+    // Redis에서 조회
+    public UserAuthCache findByUsernameInCache(String username){
+
+        return userAuthCacheRepository
                 .findByUsername(username)
                 .orElseThrow(()-> new BaseException(BaseExceptionEnum
                         .USER_NOT_FOUND));

@@ -13,10 +13,11 @@ import org.woojukang.springdefaultsetting.domain.user.dto.response.UserCreateRes
 import org.woojukang.springdefaultsetting.domain.user.dto.response.UserDeleteResponse;
 import org.woojukang.springdefaultsetting.domain.user.facade.UserFacade;
 import org.woojukang.springdefaultsetting.global.config.exception.dto.ApiResult;
+import org.woojukang.springdefaultsetting.global.security.dto.UserAuthCache;
 
 @Tag(name = "user",description = "유저 API")
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -33,6 +34,21 @@ public class UserController {
                 .body(ApiResult
                         .success(userFacade
                                 .create(userCreateRequest)));
+    }
+
+    @Operation(summary = "유저 조회",description = "해당 유저를 조회합니다.이때 , RDB가 아닌 Redis Cache에서 조회를 진행합니다.")
+    @GetMapping("/me")
+    public ResponseEntity<ApiResult<UserAuthCache>> read
+            (@AuthenticationPrincipal UserDetails userDetails){
+
+        return ResponseEntity
+                .status(HttpStatus
+                        .OK)
+                .body(ApiResult
+                        .success(userFacade
+                                .findByUsername(userDetails
+                                        .getUsername())));
+
     }
 
     @Operation(summary = "유저 삭제",description = "해당 유저를 삭제합니다.")

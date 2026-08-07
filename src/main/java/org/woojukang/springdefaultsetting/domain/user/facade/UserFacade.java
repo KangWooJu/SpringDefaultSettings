@@ -1,6 +1,7 @@
 package org.woojukang.springdefaultsetting.domain.user.facade;
 
-import jakarta.transaction.Transactional;
+
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.woojukang.springdefaultsetting.domain.user.dto.request.UserCreateRequest;
@@ -8,9 +9,11 @@ import org.woojukang.springdefaultsetting.domain.user.dto.response.UserCreateRes
 import org.woojukang.springdefaultsetting.domain.user.dto.response.UserDeleteResponse;
 import org.woojukang.springdefaultsetting.domain.user.entity.User;
 import org.woojukang.springdefaultsetting.domain.user.service.UserService;
+import org.woojukang.springdefaultsetting.global.security.dto.UserAuthCache;
 import org.woojukang.springdefaultsetting.query.user.service.UserQueryService;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+
 
 @Component
 @RequiredArgsConstructor
@@ -30,8 +33,8 @@ public class UserFacade {
         userService.save(user);
 
         return new UserCreateResponse(user.getUsername(),
-                LocalDateTime.now(),
-                LocalDateTime.now());
+                Instant.now(),
+                Instant.now());
     }
 
 
@@ -48,6 +51,13 @@ public class UserFacade {
 
         return new UserDeleteResponse(user.getUsername(),
                 user.getDeletedAt());
+    }
+
+    @Transactional(readOnly = true)
+    public UserAuthCache findByUsername(String username){
+
+        return userQueryService
+                .findByUsernameInCache(username);
     }
 
 
