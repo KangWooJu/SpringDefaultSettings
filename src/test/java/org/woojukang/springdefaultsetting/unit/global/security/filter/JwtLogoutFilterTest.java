@@ -84,7 +84,7 @@ class JwtLogoutFilterTest {
     }
 
     @Test
-    @DisplayName("유효하지 않은 refresh 토큰이면 다음 필터로 넘긴다")
+    @DisplayName("유효하지 않은 refresh 토큰이면 다음 필터로")
     void doFilterInternal_fail_invalidRefresh()
             throws Exception {
 
@@ -128,9 +128,7 @@ class JwtLogoutFilterTest {
     }
 
     @Test
-
-    @DisplayName("유효한 refresh 토큰이면 로그아웃을 수행한다")
-
+    @DisplayName("유효한 refresh 토큰일 경우, 로그아웃을 수행")
     void doFilterInternal_success()
 
             throws Exception {

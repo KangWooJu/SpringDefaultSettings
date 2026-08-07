@@ -113,7 +113,6 @@ class RefreshServiceTest {
     void refreshCookies_success() {
 
         // given
-
         String oldRefresh = "old-refresh-token";
 
         String newAccess = "new-access-token";

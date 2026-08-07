@@ -20,7 +20,6 @@ import org.woojukang.springdefaultsetting.global.security.util.JwtUtil;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -176,7 +175,6 @@ class JwtFilterTest {
             throws Exception{
 
         // given
-
         String accessToken = "accessToken";
         String username = "testUser";
 
@@ -225,7 +223,6 @@ class JwtFilterTest {
             throws Exception{
 
         // given
-
         String accessToken = "accessToken";
         String username = "testUser";
         String role = "ROLE_USER";
