@@ -1,7 +1,7 @@
 package org.woojukang.springdefaultsetting.domain.user.dto.response;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public record UserDeleteResponse(String username,
-                                 LocalDateTime deletedAt) {
+                                 Instant deletedAt) {
 }

@@ -12,7 +12,8 @@ import org.woojukang.springdefaultsetting.domain.user.service.UserService;
 import org.woojukang.springdefaultsetting.global.security.dto.UserAuthCache;
 import org.woojukang.springdefaultsetting.query.user.service.UserQueryService;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+
 
 @Component
 @RequiredArgsConstructor
@@ -32,8 +33,8 @@ public class UserFacade {
         userService.save(user);
 
         return new UserCreateResponse(user.getUsername(),
-                LocalDateTime.now(),
-                LocalDateTime.now());
+                Instant.now(),
+                Instant.now());
     }
 
 
